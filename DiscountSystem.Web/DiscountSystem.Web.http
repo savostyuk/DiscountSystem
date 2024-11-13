@@ -1,0 +1,6 @@
+@DiscountSystem.Web_HostAddress = http://localhost:5291
+
+GET {{DiscountSystem.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
