@@ -1,7 +1,6 @@
-﻿namespace DiscountSystem.Domain.Common
+﻿namespace DiscountSystem.Domain.Common;
+
+public abstract class BaseEntity
 {
-    public abstract class BaseEntity
-    {
-        public Guid Id { get; set; }
-    }
+    public Guid Id { get; set; }
 }
