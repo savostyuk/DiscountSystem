@@ -1,4 +1,4 @@
-﻿using DiscountSystem.Application;
+﻿using DiscountSystem.Application.Common;
 using DiscountSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
