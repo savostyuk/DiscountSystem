@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiscountSystem.Application.Users.Queries;
 
-public record GetAllUsers : IRequest<List<UserDTO>>
+public record GetAllUsersQuery : IRequest<List<UserDTO>>
 {
 }
 
-public class GetAllUsersHandler : IRequestHandler<GetAllUsers, List<UserDTO>>
+public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, List<UserDTO>>
 {
     private readonly IApplicationDbContext _context;
     public GetAllUsersHandler(IApplicationDbContext context)
@@ -16,7 +16,7 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsers, List<UserDTO>>
         _context = context;
     }
 
-    public async Task<List<UserDTO>> Handle(GetAllUsers request, CancellationToken cancellationToken)
+    public async Task<List<UserDTO>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
         return await _context.Users
             .Select(u => new UserDTO

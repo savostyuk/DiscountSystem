@@ -1,6 +1,47 @@
-@DiscountSystem.Web_HostAddress = http://localhost:5291
+@DiscountSystem.Web_HostAddress = http://localhost:5291/api
 
-GET {{DiscountSystem.Web_HostAddress}}/weatherforecast/
+### Get all users
+GET {{DiscountSystem.Web_HostAddress}}/users
 Accept: application/json
 
+### 
+
+### Create new user
+POST {{DiscountSystem.Web_HostAddress}}/users
+Content-Type: application/json
+{
+  "firstName": "New",
+  "lastName": "User",
+  "email": "user@example.com",
+  "role": "user"
+}
+
 ###
+
+###Delete a certain user
+DELETE {{DiscountSystem.Web_HostAddress}}/users/{id}
+
+###
+
+### Get all vendors
+GET {{DiscountSystem.Web_HostAddress}}/vendors
+Accept: application/json
+
+### 
+
+### Create new vendor
+POST {{DiscountSystem.Web_HostAddress}}/vendors
+Content-Type: application/json
+{
+  "vendorName": "New vendor",
+  "workingHours": "24/7",
+  "website": "www.vendor.com",
+  "email": "vendor@example.com",
+  "phone": "444444444",
+  "address": "Belarus"
+}
+
+###
+
+###Delete a certain vendor
+DELETE {{DiscountSystem.Web_HostAddress}}/vendors/{id}
