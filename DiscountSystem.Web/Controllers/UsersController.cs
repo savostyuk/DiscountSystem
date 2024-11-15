@@ -16,6 +16,12 @@ public class UsersController : ControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>
+    /// Get all users.
+    /// </summary>
+    /// <response code="204">Returns the list of users.</response>
+    /// <response code="404">If no users are found.</response>
+    /// <returns>A list of all users.</returns>
     [HttpGet]
     public async Task<ActionResult<List<UserDTO>>> GetAllUsers() 
     {
@@ -30,6 +36,14 @@ public class UsersController : ControllerBase
         return Ok(users);
     }
 
+    /// <summary>
+    /// Create a new user.
+    /// </summary>
+    /// <param name="command">The command to create a user.</param>
+    /// <response code="204">Returns the Id of the newly created user.</response>
+    /// <response code="400">If the request is invalid.</response>
+    /// <response code="500">If a server error occurs.</response>
+    /// <returns>The Id of the created user.</returns>
     [HttpPost]
     public async Task<ActionResult<Guid>> CreateUser([FromBody] CreateUserCommand command)
     {
@@ -50,6 +64,13 @@ public class UsersController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Delete an user by Id.
+    /// </summary>
+    /// <param name="Id">The id of the user.</param>
+    /// <response code="204">User successfully deleted.</response>
+    /// <response code="404">If the user is not found.</response>
+    /// <returns></returns>
     [HttpDelete("{Id:guid}")]
     public async Task<ActionResult> DeleteUser(Guid Id)
     {
@@ -57,5 +78,36 @@ public class UsersController : ControllerBase
         await _mediator.Send(command);
 
         return NoContent();
+    }
+
+    /// <summary>
+    /// Update an existing user by Id.
+    /// </summary>
+    /// <param name="Id">The id of the user.</param>
+    /// <response code="204">User successfully updated.</response>
+    /// <response code="404">If the user is not found.</response>
+    /// <response code="400">If the user request is invalid.</response>
+    /// <returns></returns>
+    [HttpPut("{Id:guid}")]
+    public async Task<IActionResult> UpdateUser(Guid Id, [FromBody] UpdateUserCommand command)
+    {
+        if (Id != command.Id) 
+        {
+            return BadRequest("User Id in URL does not match Id in request body");
+        }
+
+        try
+        {
+            await _mediator.Send(command);
+            return NoContent();
+        }
+        catch (Exception ex) when (ex.Message.Contains("was not found"))
+        { 
+            return NotFound(ex.Message);
+        }
+        catch (Exception exc)
+        {
+            return StatusCode(500, $"Error: {exc.Message}");
+        }
     }
 }

@@ -15,6 +15,7 @@ public class CreateUserCommand : IRequest<Guid>
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
 {
     private readonly IApplicationDbContext _context;
+
     public CreateUserCommandHandler(IApplicationDbContext context)
     {
         _context = context;

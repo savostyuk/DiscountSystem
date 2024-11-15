@@ -16,6 +16,12 @@ public class VendorsController : ControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>
+    /// Get all vendors.
+    /// </summary>
+    /// <response code="204">Returns the list of vendors.</response>
+    /// <response code="404">If no vendors are found.</response>
+    /// <returns>A list of all vendors.</returns>
     [HttpGet]
     public async Task<ActionResult<List<VendorDTO>>> GetAllVendors()
     {
@@ -30,6 +36,14 @@ public class VendorsController : ControllerBase
         return Ok(vendors);
     }
 
+    /// <summary>
+    /// Create a new vendor.
+    /// </summary>
+    /// <param name="command">The command to create a vendor.</param>
+    /// <response code="204">Returns the Id of the newly created vendor.</response>
+    /// <response code="400">If the request is invalid.</response>
+    /// <response code="500">If a server error occurs.</response>
+    /// <returns>The Id of the created vendor.</returns>
     [HttpPost]
     public async Task<ActionResult<Guid>> CreateVendor([FromBody] CreateVendorCommand command)
     {
@@ -51,6 +65,13 @@ public class VendorsController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Delete a vendor by Id.
+    /// </summary>
+    /// <param name="Id">The id of the vendor.</param>
+    /// <response code="204">Vendor successfully deleted.</response>
+    /// <response code="404">If the vendor is not found.</response>
+    /// <returns></returns>
     [HttpDelete("{Id:guid}")] 
     public async Task<ActionResult> DeleteVendor (Guid Id)
     {
@@ -58,5 +79,36 @@ public class VendorsController : ControllerBase
         await _mediator.Send(command);
 
         return NoContent();
+    }
+
+    /// <summary>
+    /// Update an existing vendor by Id.
+    /// </summary>
+    /// <param name="Id">The id of the vendor.</param>
+    /// <response code="204">Vendor successfully updated.</response>
+    /// <response code="404">If the vendor is not found.</response>
+    /// <response code="400">If the vendor request is invalid.</response>
+    /// <returns></returns>
+    [HttpPut("{Id:guid}")]
+    public async Task<IActionResult> UpdateVendor (Guid Id, [FromBody] UpdateVendorCommand command)
+    {
+        if (Id != command.Id)
+        {
+            return BadRequest("Vendor Id in URL does not match Id in request body");
+        }
+
+        try
+        {
+            await _mediator.Send(command);
+            return NoContent();
+        }
+        catch (Exception ex) when (ex.Message.Contains("was not found"))
+        {
+            return NotFound(ex.Message);
+        }
+        catch (Exception exc)
+        {
+            return StatusCode(500, $"Error: {exc.Message}");
+        }
     }
 }

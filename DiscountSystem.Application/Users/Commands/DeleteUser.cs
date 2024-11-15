@@ -8,6 +8,7 @@ public record DeleteUserCommand (Guid Id) : IRequest;
 public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
 {
     private readonly IApplicationDbContext _context;
+
     public DeleteUserCommandHandler(IApplicationDbContext context)
     {
         _context = context;

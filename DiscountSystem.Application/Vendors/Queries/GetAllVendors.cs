@@ -11,6 +11,7 @@ public record GetAllVendorsQuery : IRequest<List<VendorDTO>>
 public class GetAllVendorsHandler : IRequestHandler<GetAllVendorsQuery, List<VendorDTO>>
 {
     private readonly IApplicationDbContext _context;
+
     public GetAllVendorsHandler(IApplicationDbContext context)
     {
         _context = context;

@@ -10,7 +10,6 @@ public class CreateVendorCommand : IRequest<Guid>
     public string WorkingHours { get; set; }
     public string Website { get; set; }
     public string Email { get; set; }
-
     public string Phone { get; set; }
     public string Address { get; set; }
 }
@@ -18,6 +17,7 @@ public class CreateVendorCommand : IRequest<Guid>
 public class CreateVendorCommandHandler : IRequestHandler<CreateVendorCommand, Guid>
 {
     private readonly IApplicationDbContext _context;
+
     public CreateVendorCommandHandler(IApplicationDbContext context)
     {
         _context = context;
