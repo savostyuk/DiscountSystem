@@ -8,6 +8,7 @@ public record DeleteVendorCommand (Guid Id) : IRequest;
 public class DeleteVendorCommandHadler : IRequestHandler<DeleteVendorCommand>
 {
     private readonly IApplicationDbContext _context;
+
     public DeleteVendorCommandHadler(IApplicationDbContext context)
     {
         _context = context;

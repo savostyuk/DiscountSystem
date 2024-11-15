@@ -11,6 +11,7 @@ public record GetAllUsersQuery : IRequest<List<UserDTO>>
 public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, List<UserDTO>>
 {
     private readonly IApplicationDbContext _context;
+
     public GetAllUsersHandler(IApplicationDbContext context)
     {
         _context = context;
@@ -23,7 +24,11 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, List<UserDTO
             {
                 Id = u.Id,
                 Email = u.Email,
-                FullName = $"{u.FirstName} {u.LastName}"
+                FullName = $"{u.FirstName} {u.LastName}",
+                CreatedAt = u.CreatedAt,
+                CreatedBy = u.CreatedBy,
+                LastModifiedAt = u.LastModifiedAt,
+                LastModifiedBy = u.LastModifiedBy
             }).ToListAsync(cancellationToken);
     }
 }

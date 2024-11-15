@@ -9,7 +9,6 @@ public class VendorDTO : BaseAuditableEntity
     public string VendorName { get; set; }
     public string WorkingHours { get; set; }
     public string Website { get; set; }
-    [EmailAddress]
     public string Email { get; set; }
 
     public string Phone { get; set; }

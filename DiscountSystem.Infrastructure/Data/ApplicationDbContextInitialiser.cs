@@ -5,6 +5,7 @@ namespace DiscountSystem.Infrastructure.Data;
 public class ApplicationDbContextInitialiser
 {
     private readonly ApplicationDbContext _context;
+
     public ApplicationDbContextInitialiser (ApplicationDbContext context)
     {
         _context = context;
@@ -27,7 +28,7 @@ public class ApplicationDbContextInitialiser
         {
             if (!_context.Users.Any()) 
             {
-                var adminId = new Guid();
+                var adminId = Guid.NewGuid();
                 _context.Users.AddRange(
                     new Domain.Entities.User
                     {
