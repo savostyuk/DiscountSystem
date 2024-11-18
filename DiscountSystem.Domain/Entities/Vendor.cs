@@ -13,4 +13,5 @@ public class Vendor : BaseAuditableEntity
 
     public string Phone { get; set; }
     public string Address { get; set; }
+    public ICollection<Discount> Discounts { get; set; }
 }
