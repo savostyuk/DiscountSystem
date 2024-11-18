@@ -1,5 +1,6 @@
 ﻿using DiscountSystem.Application.Common;
 using DiscountSystem.Domain.Entities;
+using DiscountSystem.Domain.Entities.Enums;
 using MediatR;
 
 namespace DiscountSystem.Application.Users.Commands;
@@ -9,7 +10,7 @@ public class CreateUserCommand : IRequest<Guid>
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Email { get; set; }
-    public string Role { get; set; }
+    public Roles Role { get; set; }
 }
 
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>

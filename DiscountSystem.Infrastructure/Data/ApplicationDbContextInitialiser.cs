@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DiscountSystem.Domain.Entities.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiscountSystem.Infrastructure.Data;
 
@@ -36,7 +37,7 @@ public class ApplicationDbContextInitialiser
                         FirstName = "Natalya",
                         LastName = "Shulzhenka",
                         Email = "text@gmail.com",
-                        Role = "admin",
+                        Role = Roles.Admin,
                         CreatedBy = null,
                         CreatedAt = DateTime.Now,
                         LastModifiedBy = null,
@@ -48,7 +49,7 @@ public class ApplicationDbContextInitialiser
                         FirstName = "Anton",
                         LastName = "Romashko",
                         Email = "example@gmail.com",
-                        Role = "user",
+                        Role = Roles.User,
                         CreatedBy = adminId,
                         CreatedAt = DateTime.Now,
                         LastModifiedBy = adminId,
@@ -60,7 +61,7 @@ public class ApplicationDbContextInitialiser
                         FirstName = "Roman",
                         LastName = "Domaracki",
                         Email = "user@gmail.com",
-                        Role = "user",
+                        Role = Roles.Moderator,
                         CreatedBy = adminId,
                         CreatedAt = DateTime.Now,
                         LastModifiedBy = adminId,
