@@ -1,4 +1,5 @@
-﻿using DiscountSystem.Application.Vendors.Commands;
+﻿using DiscountSystem.Application.Users.Queries;
+using DiscountSystem.Application.Vendors.Commands;
 using DiscountSystem.Application.Vendors.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -53,7 +54,7 @@ public class VendorsController : ControllerBase
             return BadRequest("An error occured!");
         }
 
-            return Ok(vendorId);
+        return Ok(vendorId);
     }
 
     /// <summary>
@@ -63,8 +64,8 @@ public class VendorsController : ControllerBase
     /// <response code="204">Vendor successfully deleted.</response>
     /// <response code="404">If the vendor is not found.</response>
     /// <returns></returns>
-    [HttpDelete("{Id:guid}")] 
-    public async Task<ActionResult> DeleteVendor (Guid Id)
+    [HttpDelete("{Id:guid}")]
+    public async Task<ActionResult> DeleteVendor(Guid Id)
     {
         var command = new DeleteVendorCommand(Id);
         await _mediator.Send(command);
@@ -81,7 +82,7 @@ public class VendorsController : ControllerBase
     /// <response code="400">If the vendor request is invalid.</response>
     /// <returns></returns>
     [HttpPut("{Id:guid}")]
-    public async Task<IActionResult> UpdateVendor (Guid Id, [FromBody] UpdateVendorCommand command)
+    public async Task<IActionResult> UpdateVendor(Guid Id, [FromBody] UpdateVendorCommand command)
     {
         if (Id != command.Id)
         {
@@ -97,5 +98,14 @@ public class VendorsController : ControllerBase
         {
             return NotFound(ex.Message);
         }
+    }
+
+    [HttpGet("{id}/discounts")]  //api/vendors/{id}/discounts
+    public async Task<IActionResult> GetDiscountsByVendorId(Guid vendorId)
+    {
+        var query = new GetDiscountByVendorIdQuery(vendorId);
+        var result = await _mediator.Send(query);
+
+        return Ok(result);
     }
 }

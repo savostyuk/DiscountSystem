@@ -1,5 +1,6 @@
 ﻿using DiscountSystem.Application.Categories.Commands;
 using DiscountSystem.Application.Categories.Queries;
+using DiscountSystem.Application.Users.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -97,5 +98,14 @@ public class CategoriesController : ControllerBase
         {
             return NotFound(ex.Message);
         }
+    }
+
+    [HttpGet("{id}/discounts")] //api/categories/{id}/discounts
+    public async Task<IActionResult> GetDiscountsByCategoryId(Guid categoryId)
+    {
+        var query = new GetDiscountByCategoryIdQuery(categoryId);
+        var result = await _mediator.Send(query);
+
+        return Ok(result);
     }
 }
