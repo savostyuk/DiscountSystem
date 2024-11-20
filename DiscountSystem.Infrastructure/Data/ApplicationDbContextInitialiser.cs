@@ -116,6 +116,21 @@ public class ApplicationDbContextInitialiser
                     });
             }
 
+            if(!_context.Categories.Any())
+            {
+                _context.Categories.AddRange(
+                    new Domain.Entities.Category
+                    {
+                        Id = Guid.NewGuid(),
+                        CategoryName = "Health",
+                        CreatedBy = null,
+                        CreatedAt = DateTime.Now,
+                        LastModifiedBy = null,
+                        LastModifiedAt = DateTime.Now
+                    });
+
+            }
+
             await _context.SaveChangesAsync();
         }
         catch (Exception ex)
