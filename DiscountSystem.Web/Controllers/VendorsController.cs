@@ -97,9 +97,5 @@ public class VendorsController : ControllerBase
         {
             return NotFound(ex.Message);
         }
-        catch (Exception exc)
-        {
-            return StatusCode(500, $"Error: {exc.Message}");
-        }
     }
 }
