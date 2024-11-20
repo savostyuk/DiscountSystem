@@ -42,26 +42,18 @@ public class UsersController : ControllerBase
     /// <param name="command">The command to create a user.</param>
     /// <response code="204">Returns the Id of the newly created user.</response>
     /// <response code="400">If the request is invalid.</response>
-    /// <response code="500">If a server error occurs.</response>
     /// <returns>The Id of the created user.</returns>
     [HttpPost]
     public async Task<ActionResult<Guid>> CreateUser([FromBody] CreateUserCommand command)
     {
-        try
-        {
-            var userId = await _mediator.Send(command);
+        var userId = await _mediator.Send(command);
 
-            if (userId == Guid.Empty) 
-            {
-                return BadRequest("An error occured!");
-            }
+        if (userId == Guid.Empty) 
+        {
+            return BadRequest("An error occured!");
+        }
 
             return Ok(userId);
-        }
-        catch (Exception ex) 
-        {
-            return StatusCode(500, $"Error: {ex.Message}");
-        }
     }
 
     /// <summary>

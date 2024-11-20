@@ -31,6 +31,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
             Email = request.Email,
             Role = request.Role,
         };
+
         _context.Users.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);

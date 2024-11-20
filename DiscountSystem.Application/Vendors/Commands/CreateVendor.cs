@@ -34,6 +34,7 @@ public class CreateVendorCommandHandler : IRequestHandler<CreateVendorCommand, G
             Phone = request.Phone,
             Address = request.Address,
         };
+
         _context.Vendors.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);

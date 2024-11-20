@@ -42,27 +42,18 @@ public class VendorsController : ControllerBase
     /// <param name="command">The command to create a vendor.</param>
     /// <response code="204">Returns the Id of the newly created vendor.</response>
     /// <response code="400">If the request is invalid.</response>
-    /// <response code="500">If a server error occurs.</response>
     /// <returns>The Id of the created vendor.</returns>
     [HttpPost]
     public async Task<ActionResult<Guid>> CreateVendor([FromBody] CreateVendorCommand command)
     {
-        try
-        {
-            var vendorId = await _mediator.Send(command);
+        var vendorId = await _mediator.Send(command);
 
-            if (vendorId == Guid.Empty)
-            {
-                return BadRequest("An error occured!");
-            }
+        if (vendorId == Guid.Empty)
+        {
+            return BadRequest("An error occured!");
+        }
 
             return Ok(vendorId);
-
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Error: {ex.Message}");
-        }
     }
 
     /// <summary>
