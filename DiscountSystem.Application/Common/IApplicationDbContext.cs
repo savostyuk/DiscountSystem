@@ -9,5 +9,6 @@ public interface IApplicationDbContext
     DbSet<Vendor> Vendors { get; }
     DbSet<Category> Categories { get; }
     DbSet<Discount> Discounts { get; }
+    DbSet<Favorite> Favorites { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
