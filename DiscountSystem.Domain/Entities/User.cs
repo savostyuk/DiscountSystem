@@ -11,4 +11,6 @@ public class User : BaseAuditableEntity
     [EmailAddress]
     public string Email { get; set; }
     public Roles Role { get; set; }
+
+    public ICollection<Favorite> Favorites { get; set; }
 }
