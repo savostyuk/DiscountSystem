@@ -68,9 +68,17 @@ public class VendorsController : ControllerBase
     public async Task<ActionResult> DeleteVendor(Guid Id)
     {
         var command = new DeleteVendorCommand(Id);
-        await _mediator.Send(command);
 
-        return NoContent();
+        try
+        {
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+        catch (Exception ex) 
+        {
+            return NotFound(ex.Message);
+        }
     }
 
     /// <summary>

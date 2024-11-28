@@ -68,9 +68,18 @@ public class CategoriesController : ControllerBase
     public async Task<ActionResult> DeleteCategory(Guid Id)
     {
         var command = new DeleteCategoryCommand(Id);
-        await _mediator.Send(command);
 
-        return NoContent();
+        try
+        {
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+        catch (Exception ex) 
+        { 
+            return NotFound(ex.Message);
+        }
+
     }
 
     /// <summary>

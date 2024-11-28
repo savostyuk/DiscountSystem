@@ -67,9 +67,17 @@ public class UsersController : ControllerBase
     public async Task<ActionResult> DeleteUser(Guid Id)
     {
         var command = new DeleteUserCommand(Id);
-        await _mediator.Send(command);
+        try
+        {
+            await _mediator.Send(command);
 
-        return NoContent();
+            return NoContent();
+        }
+        catch (Exception ex) 
+        { 
+            return NotFound(ex.Message);
+        }
+
     }
 
     /// <summary>
