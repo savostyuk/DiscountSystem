@@ -1,7 +1,5 @@
-using DiscountSystem.Application.Common;
 using DiscountSystem.Infrastructure.Data;
 using DiscountSystem.Web;
-using DiscountSystem.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,10 +12,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
-
-builder.Services.AddExceptionHandler<CustomExceptionHandler>();
-builder.Services.AddScoped<IUser, CurrentUserService>();
-builder.Services.AddHttpContextAccessor();
+builder.Services.AddWebServices();
 
 var app = builder.Build();
 

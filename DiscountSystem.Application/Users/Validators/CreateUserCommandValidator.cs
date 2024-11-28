@@ -32,10 +32,6 @@ public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
             .WithMessage("Please enter a valid email address.")
             .MustAsync(BeUniqueEmail)
             .WithMessage("Email must be unique.");
-
-        RuleFor(u => u.Role)
-            .NotEmpty()
-            .WithMessage("Role is required.");
     }
 
     private async Task<bool> BeUniqueEmail(string email, CancellationToken cancellationToken)
