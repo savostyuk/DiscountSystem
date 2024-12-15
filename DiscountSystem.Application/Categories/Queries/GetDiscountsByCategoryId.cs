@@ -1,15 +1,16 @@
-﻿using DiscountSystem.Application.Common;
+using DiscountSystem.Application.Common;
+using DiscountSystem.Application.Discounts.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiscountSystem.Application.Users.Queries;
+namespace DiscountSystem.Application.Categories.Queries;
 
 public record GetDiscountByCategoryIdQuery : IRequest<List<DiscountDTO>>
 {
     public Guid CategoryId { get; set; }
     public GetDiscountByCategoryIdQuery(Guid categoryId)
     {
-        CategoryId = categoryId;   
+        CategoryId = categoryId;
     }
 }
 

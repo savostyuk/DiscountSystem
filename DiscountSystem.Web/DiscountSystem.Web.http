@@ -1,5 +1,7 @@
 @DiscountSystem.Web_HostAddress = http://localhost:5291/api
 
+### Users Controller ###
+
 ### Get all users
 GET {{DiscountSystem.Web_HostAddress}}/users
 Accept: application/json
@@ -23,6 +25,20 @@ DELETE {{DiscountSystem.Web_HostAddress}}/users/{id}
 
 ###
 
+### Update a user by Id
+PUT {{DiscountSystem.Web_HostAddress}}/users/{id}
+Content-Type: application/json
+{
+  "id": "{id}",
+  "email": "updateduser@example.com",
+  "firstName": "Updated",
+  "lastName": "User"
+}
+
+###
+
+### Vendors Controller ###
+
 ### Get all vendors
 GET {{DiscountSystem.Web_HostAddress}}/vendors
 Accept: application/json
@@ -45,3 +61,112 @@ Content-Type: application/json
 
 ###Delete a certain vendor
 DELETE {{DiscountSystem.Web_HostAddress}}/vendors/{id}
+
+###
+
+### Update a vendor by Id
+PUT {{DiscountSystem.Web_HostAddress}}/vendors/{id}
+Content-Type: application/json
+{
+  "id": "{id}",
+  "vendorName": "Updated Name",
+  "workingHours": "Updated",
+  "website": "www.updatedWebsite.com",
+  "email": "vendor@example.com",
+  "phone": "444444444",
+  "address": "Updated address"
+}
+
+###
+
+### Get all discounts by Vendor Id
+GET {{DiscountSystem.Web_HostAddress}}/vendors/{id}/discounts
+Accept: application/json
+
+###
+
+### Categories Controller ###
+
+### Get all categories
+GET {{DiscountSystem.Web_HostAddress}}/categories
+Accept: application/json
+
+### 
+
+### Create a new category
+POST {{DiscountSystem.Web_HostAddress}}/categories
+Content-Type: application/json
+{
+  "categoryName": "New category"
+}
+
+###
+
+###Delete a certain category
+DELETE {{DiscountSystem.Web_HostAddress}}/categories/{id}
+
+###
+
+### Update a category by Id
+PUT {{DiscountSystem.Web_HostAddress}}/categories/{id}
+Content-Type: application/json
+{
+  "id": "{id}",
+  "categoryName": "Updated category"
+}
+
+###
+
+### Get all discounts by Category Id.
+GET {{DiscountSystem.Web_HostAddress}}/categories/{id}/discounts
+Accept: application/json
+
+###
+
+### Discounts Controller ###
+
+### Get all discounts
+GET {{DiscountSystem.Web_HostAddress}}/discounts
+Accept: application/json
+
+### 
+
+### Get details of a specific discount by Id
+GET {{DiscountSystem.Web_HostAddress}}/discounts/{id}
+Accept: application/json
+
+###
+
+### Create a new discount
+POST {{DiscountSystem.Web_HostAddress}}/discounts
+Content-Type: application/json
+{
+  "discountName": "New discount",
+  "condition": "New condition",
+  "promocode": "New promocode",
+  "startDate": "New start date",
+  "endDate": "New end date",
+  "vendorId": "Vendor Id",
+  "category Id": "Category Id"
+}
+
+###
+
+### Update a discount by Id
+PUT {{DiscountSystem.Web_HostAddress}}/discounts/{id}
+Content-Type: application/json
+{
+  "id": "{id}",
+  "discountName": "New discount",
+  "condition": "New condition",
+  "promocode": "New promocode",
+  "startDate": "New start date",
+  "endDate": "New end date"
+}
+
+###
+
+###Delete a certain discount
+DELETE {{DiscountSystem.Web_HostAddress}}/discounts/{id}
+
+###

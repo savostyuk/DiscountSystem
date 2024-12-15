@@ -1,8 +1,9 @@
-﻿using DiscountSystem.Application.Common;
+using DiscountSystem.Application.Common;
+using DiscountSystem.Application.Discounts.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiscountSystem.Application.Users.Queries;
+namespace DiscountSystem.Application.Vendors.Queries;
 
 public record GetDiscountByVendorIdQuery : IRequest<List<DiscountDTO>>
 {
@@ -23,11 +24,11 @@ public class GetDiscountByVendorIdHandler : IRequestHandler<GetDiscountByVendorI
         _context = context;
     }
 
-    public async Task<List<DiscountDTO>> Handle(GetDiscountByVendorIdQuery request, 
+    public async Task<List<DiscountDTO>> Handle(GetDiscountByVendorIdQuery request,
         CancellationToken cancellationToken)
     {
         return await _context.Discounts
-            .Where(d =>  d.VendorId == request.VendorId)
+            .Where(d => d.VendorId == request.VendorId)
             .Select(d => new DiscountDTO
             {
                 Id = d.Id,
