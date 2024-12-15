@@ -1,12 +1,14 @@
 ﻿using DiscountSystem.Application.Categories.Commands;
 using DiscountSystem.Application.Categories.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiscountSystem.Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class CategoriesController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -22,6 +24,7 @@ public class CategoriesController : ControllerBase
     /// <response code="204">Returns the list of categories.</response>
     /// <response code="404">If no categories are found.</response>
     /// <returns>A list of all categories.</returns>
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<List<CategoryDTO>>> GetAllCategories()
     {
@@ -114,6 +117,7 @@ public class CategoriesController : ControllerBase
     /// <param name="Id">The id of the category.</param>
     /// <response code="204">Returns the list of discounts by Category id.</response>
     /// <returns>A list of discounts by Category id.</returns>
+    [AllowAnonymous]
     [HttpGet("{id}/discounts")] //api/categories/{id}/discounts
     public async Task<IActionResult> GetDiscountsByCategoryId(Guid categoryId)
     {

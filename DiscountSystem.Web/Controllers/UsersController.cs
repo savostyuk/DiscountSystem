@@ -1,12 +1,14 @@
 ﻿using DiscountSystem.Application.Users.Commands;
 using DiscountSystem.Application.Users.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiscountSystem.Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class UsersController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -22,6 +24,7 @@ public class UsersController : ControllerBase
     /// <response code="204">Returns the list of users.</response>
     /// <response code="404">If no users are found.</response>
     /// <returns>A list of all users.</returns>
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<List<UserDTO>>> GetAllUsers() 
     {
