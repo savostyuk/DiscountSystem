@@ -1,5 +1,4 @@
-﻿using DiscountSystem.Application.Users.Queries;
-using DiscountSystem.Application.Vendors.Commands;
+﻿using DiscountSystem.Application.Vendors.Commands;
 using DiscountSystem.Application.Vendors.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

@@ -20,7 +20,7 @@ public class GetDiscountDetailsHandler : IRequestHandler<GetDiscountDetailsQuery
 
     public async Task<DiscountDetailsDTO> Handle(GetDiscountDetailsQuery request, CancellationToken cancellationToken)
     {
-        var ticketDetails = await _context.Discounts
+        var discountDetails = await _context.Discounts
             .Where(d => d.Id == request.Id)
             .Select(d => new DiscountDetailsDTO
             {
@@ -34,11 +34,11 @@ public class GetDiscountDetailsHandler : IRequestHandler<GetDiscountDetailsQuery
                 CategoryName = d.Category.CategoryName,
             }).FirstOrDefaultAsync(cancellationToken);
 
-        if (ticketDetails == null) 
+        if (discountDetails == null) 
         {
             throw new Exception($"Discount with Id {request.Id} was not foumd");
         }
 
-        return ticketDetails;
+        return discountDetails;
     }
 }

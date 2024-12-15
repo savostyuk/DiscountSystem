@@ -1,6 +1,5 @@
 ﻿using DiscountSystem.Application.Categories.Commands;
 using DiscountSystem.Application.Categories.Queries;
-using DiscountSystem.Application.Users.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
