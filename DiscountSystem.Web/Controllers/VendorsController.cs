@@ -108,6 +108,12 @@ public class VendorsController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Get all discounts by Vendor Id.
+    /// </summary>
+    /// <param name="Id">The id of the vendor.</param>
+    /// <response code="204">Returns the list of discounts by Vendor id.</response>
+    /// <returns>A list of discounts by Vendor id.</returns>
     [HttpGet("{id}/discounts")]  //api/vendors/{id}/discounts
     public async Task<IActionResult> GetDiscountsByVendorId(Guid vendorId)
     {
