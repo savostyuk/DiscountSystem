@@ -109,6 +109,12 @@ public class CategoriesController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Get all discounts by Category Id.
+    /// </summary>
+    /// <param name="Id">The id of the category.</param>
+    /// <response code="204">Returns the list of discounts by Category id.</response>
+    /// <returns>A list of discounts by Category id.</returns>
     [HttpGet("{id}/discounts")] //api/categories/{id}/discounts
     public async Task<IActionResult> GetDiscountsByCategoryId(Guid categoryId)
     {
