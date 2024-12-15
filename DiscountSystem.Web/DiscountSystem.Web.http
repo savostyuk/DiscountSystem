@@ -14,8 +14,7 @@ Content-Type: application/json
 {
   "firstName": "New",
   "lastName": "User",
-  "email": "user@example.com",
-  "role": "user"
+  "email": "user@example.com"
 }
 
 ###

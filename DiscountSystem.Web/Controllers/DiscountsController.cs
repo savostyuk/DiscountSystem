@@ -1,12 +1,14 @@
 ﻿using DiscountSystem.Application.Discounts.Commands;
 using DiscountSystem.Application.Discounts.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiscountSystem.Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class DiscountsController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -22,6 +24,7 @@ public class DiscountsController : ControllerBase
     /// <response code="204">Returns the list of discounts.</response>
     /// <response code="404">If no discounts are found.</response>
     /// <returns>A list of all discounts.</returns>
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<List<DiscountDTO>>> GetAllDiscounts()
     {
@@ -43,6 +46,7 @@ public class DiscountsController : ControllerBase
     /// <response code="204">Returns the discount.</response>
     /// <response code="404">If the discount is not found.</response>
     /// <returns>The details of the specified discount.</returns>
+    [AllowAnonymous]
     [HttpGet("{discountId:guid}")]
     public async Task<IActionResult> GetDiscountDetails(Guid discountId)
     {

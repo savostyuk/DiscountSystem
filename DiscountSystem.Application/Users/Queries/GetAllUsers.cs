@@ -24,11 +24,7 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, List<UserDTO
             {
                 Id = u.Id,
                 Email = u.Email,
-                FullName = $"{u.FirstName} {u.LastName}",
-                CreatedAt = u.CreatedAt,
-                CreatedBy = u.CreatedBy,
-                LastModifiedAt = u.LastModifiedAt,
-                LastModifiedBy = u.LastModifiedBy
+                FullName = $"{u.FirstName} {u.LastName}"
             }).ToListAsync(cancellationToken);
     }
 }

@@ -1,12 +1,14 @@
 ﻿using DiscountSystem.Application.Vendors.Commands;
 using DiscountSystem.Application.Vendors.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiscountSystem.Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class VendorsController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -22,6 +24,7 @@ public class VendorsController : ControllerBase
     /// <response code="204">Returns the list of vendors.</response>
     /// <response code="404">If no vendors are found.</response>
     /// <returns>A list of all vendors.</returns>
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<List<VendorDTO>>> GetAllVendors()
     {
@@ -113,6 +116,7 @@ public class VendorsController : ControllerBase
     /// <param name="Id">The id of the vendor.</param>
     /// <response code="204">Returns the list of discounts by Vendor id.</response>
     /// <returns>A list of discounts by Vendor id.</returns>
+    [AllowAnonymous]
     [HttpGet("{id}/discounts")]  //api/vendors/{id}/discounts
     public async Task<IActionResult> GetDiscountsByVendorId(Guid vendorId)
     {
