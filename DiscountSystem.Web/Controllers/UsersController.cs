@@ -8,7 +8,7 @@ namespace DiscountSystem.Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class UsersController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -20,7 +20,7 @@ public class UsersController : ControllerBase
         _mediator = mediator;
         _logger = logger;
     }
-
+    
     /// <summary>
     /// Get all users.
     /// </summary>
