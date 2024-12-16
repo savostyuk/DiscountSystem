@@ -8,7 +8,7 @@ namespace DiscountSystem.Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+[Authorize(Roles = "Admin, Moderator")]
 public class CategoriesController : ControllerBase
 {
     private readonly IMediator _mediator;

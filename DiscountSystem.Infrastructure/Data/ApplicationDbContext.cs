@@ -1,5 +1,6 @@
 ﻿using DiscountSystem.Application.Common;
 using DiscountSystem.Domain.Entities;
+using DiscountSystem.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,8 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
     public DbSet<Discount> Discounts { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Favorite> Favorites { get; set; }
+
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
 
     protected override void OnModelCreating (ModelBuilder modelBuilder)
     {
@@ -46,5 +49,14 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
             .WithMany(u => u.Favorites)
             .HasForeignKey(f => f.UserId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<RefreshToken>()
+            .HasIndex(rt => rt.Token)
+            .IsUnique();
+
+        modelBuilder.Entity<RefreshToken>()
+            .HasOne(rt => rt.User)
+            .WithMany()
+            .HasForeignKey(rt => rt.UserId);
     }
 }
