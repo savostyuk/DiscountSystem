@@ -6,17 +6,6 @@
 GET {{DiscountSystem.Web_HostAddress}}/users
 Accept: application/json
 
-### 
-
-### Create new user
-POST {{DiscountSystem.Web_HostAddress}}/users
-Content-Type: application/json
-{
-  "firstName": "New",
-  "lastName": "User",
-  "email": "user@example.com"
-}
-
 ###
 
 ###Delete a certain user

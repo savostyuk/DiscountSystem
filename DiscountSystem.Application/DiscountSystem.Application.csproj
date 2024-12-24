@@ -16,4 +16,8 @@
     <ProjectReference Include="..\DiscountSystem.Domain\DiscountSystem.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Models\" />
+  </ItemGroup>
+
 </Project>

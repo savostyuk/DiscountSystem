@@ -47,29 +47,6 @@ public class UsersController : ControllerBase
     }
 
     /// <summary>
-    /// Create a new user.
-    /// </summary>
-    /// <param name="command">The command to create a user.</param>
-    /// <response code="204">Returns the Id of the newly created user.</response>
-    /// <response code="400">If the request is invalid.</response>
-    /// <returns>The Id of the created user.</returns>
-    [HttpPost]
-    public async Task<ActionResult<Guid>> CreateUser([FromBody] CreateUserCommand command)
-    {
-        _logger.LogInformation("Received request to create a new user.");
-        var userId = await _mediator.Send(command);
-
-        if (userId == Guid.Empty) 
-        {
-            _logger.LogWarning("User creation failed.");
-            return BadRequest("An error occured!");
-        }
-
-        _logger.LogInformation("Successfully created user with Id: {UserId}.", userId);
-        return Ok(userId);
-    }
-
-    /// <summary>
     /// Delete an user by Id.
     /// </summary>
     /// <param name="Id">The id of the user.</param>

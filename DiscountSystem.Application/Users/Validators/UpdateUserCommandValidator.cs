@@ -23,18 +23,5 @@ public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
             .WithMessage("Last Name is required.")
             .MaximumLength(100)
             .WithMessage("Last Name cannot exceed 100 characters.");
-
-        RuleFor(p => p.Email)
-            .NotEmpty()
-            .WithMessage("Email is required.")
-            .EmailAddress()
-            .WithMessage("Please enter a valid email address.")
-            .MustAsync(BeUniqueEmail)
-            .WithMessage("User with this email already exsists.");
-    }
-
-    private async Task<bool> BeUniqueEmail(string email, CancellationToken cancellationToken)
-    {
-        return !await _context.Users.AnyAsync(u => u.Email == email, cancellationToken);
     }
 }
