@@ -41,11 +41,12 @@ public class DiscountsController : ControllerBase
     }
 
     /// <summary>
-    /// Get discounts with pagination.
+    /// Get a paginated list of discounts.
     /// </summary>
-    /// <response code="204">Returns the page of discounts.</response>
-    /// <response code="404">If no discounts are found.</response>
-    /// <returns>A page of discounts.</returns>
+    /// <param name="query">The query parameters for pagination discounts.</param>
+    /// <response code="200">Returns a paginated list of discounts.</response>
+    /// <response code="404">If no discounts are found for the specified query.</response>
+    /// <returns>A paginated list of discounts.</returns>
     [AllowAnonymous]
     [HttpGet("paginated")]
     public async Task<PaginatedList<DiscountDTO>> GetDiscountsWithPagination([FromQuery] GetPaginatedDiscountsQuery query)
