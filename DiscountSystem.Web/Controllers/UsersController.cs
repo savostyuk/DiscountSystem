@@ -1,4 +1,5 @@
 ﻿using DiscountSystem.Application.Common.Models;
+using DiscountSystem.Application.Users;
 using DiscountSystem.Application.Users.Commands;
 using DiscountSystem.Application.Users.Queries;
 using MediatR;
@@ -48,11 +49,12 @@ public class UsersController : ControllerBase
     }
 
     /// <summary>
-    /// Get users with pagination.
+    /// Get a paginated list of users.
     /// </summary>
-    /// <response code="204">Returns the page of users.</response>
-    /// <response code="404">If no users are found.</response>
-    /// <returns>A page of users.</returns>
+    /// <param name="query">The query parameters for pagination.</param>
+    /// <response code="200">Returns a paginated list of users.</response>
+    /// <response code="404">If no users are found for the specified query.</response>
+    /// <returns>A paginated list of users.</returns>
     [AllowAnonymous]
     [HttpGet("paginated")]
     public async Task<PaginatedList<UserDTO>> GetUsersWithPagination([FromQuery] GetPaginatedUsersQuery query)
@@ -60,6 +62,28 @@ public class UsersController : ControllerBase
         _logger.LogInformation("Received request to get page of users.");
 
         return await _mediator.Send(query);
+    }
+
+    /// <summary>
+    /// Get users based on a specified filter.
+    /// </summary>
+    /// <param name="filter">The filter criteria to apply.</param>
+    /// <response code="200">Returns the list of users matching the filter criteria.</response>
+    /// <response code="404">If no users are found matching the filter criteria.</response>
+    /// <returns>A filtered list of users.</returns>
+    [AllowAnonymous]
+    [HttpGet("filter")]
+    public async Task<ActionResult<List<UserDTO>>> GetUsersWithFilter([FromQuery] UserFilter filter)
+    {
+        var query = new GetFilteredUsersQuery { Filter = filter };
+        var users = await _mediator.Send(query);
+
+        if(users is null or [])
+        {
+            return NotFound("Users were not found.");
+        }
+
+        return Ok(users);
     }
 
     /// <summary>
