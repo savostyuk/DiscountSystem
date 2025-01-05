@@ -24,14 +24,12 @@ public class GetAllDiscountsHandler : IRequestHandler<GetAllDiscountsQuery, List
             {
                 Id = d.Id,
                 DiscountName = d.DiscountName,
+                VendorName = d.Vendor.VendorName,
+                Category = d.Category.CategoryName,
                 Condition = d.Condition,
                 Promocode = d.Promocode,
                 StartDate = d.StartDate,
-                EndDate = d.EndDate,
-                CreatedAt = d.CreatedAt,
-                CreatedBy = d.CreatedBy,
-                LastModifiedAt = d.LastModifiedAt,
-                LastModifiedBy = d.LastModifiedBy
+                EndDate = d.EndDate
             }).ToListAsync(cancellationToken);
     }
 }

@@ -1,4 +1,5 @@
-﻿using DiscountSystem.Application.Users.Commands;
+﻿using DiscountSystem.Application.Common.Models;
+using DiscountSystem.Application.Users.Commands;
 using DiscountSystem.Application.Users.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -44,6 +45,21 @@ public class UsersController : ControllerBase
 
         _logger.LogInformation("Successfully retrieved {UserCount} users.", users.Count);
         return Ok(users);
+    }
+
+    /// <summary>
+    /// Get users with pagination.
+    /// </summary>
+    /// <response code="204">Returns the page of users.</response>
+    /// <response code="404">If no users are found.</response>
+    /// <returns>A page of users.</returns>
+    [AllowAnonymous]
+    [HttpGet("paginated")]
+    public async Task<PaginatedList<UserDTO>> GetUsersWithPagination([FromQuery] GetPaginatedUsersQuery query)
+    {
+        _logger.LogInformation("Received request to get page of users.");
+
+        return await _mediator.Send(query);
     }
 
     /// <summary>
