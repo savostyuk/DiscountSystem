@@ -83,7 +83,7 @@ public class DiscountsController : ControllerBase
     /// <response code="400">If the request is invalid.</response>
     /// <returns>The Id of the created discount.</returns>
     [HttpPost]
-    public async Task<ActionResult<Guid>> CreateVendor([FromBody] CreateDiscountCommand command)
+    public async Task<ActionResult<Guid>> CreateDiscount([FromBody] CreateDiscountCommand command)
     {
         var discountId = await _mediator.Send(command);
 

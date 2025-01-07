@@ -25,7 +25,6 @@ public class GetDiscountDetailsHandler : IRequestHandler<GetDiscountDetailsQuery
             .Select(d => new DiscountDetailsDTO
             {
                 Id = d.Id,
-                DiscountName = d.DiscountName,
                 Condition = d.Condition,
                 Promocode = d.Promocode,
                 StartDate = d.StartDate,

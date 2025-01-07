@@ -6,7 +6,6 @@ namespace DiscountSystem.Application.Discounts.Commands;
 
 public class CreateDiscountCommand : IRequest<Guid>
 {
-    public string DiscountName { get; set; }
     public string Condition { get; set; }
     public string Promocode { get; set; }
     public DateTime StartDate { get; set; }
@@ -28,7 +27,6 @@ public class CreateDiscountCommandHandler : IRequestHandler<CreateDiscountComman
     {
         var entity = new Discount
         {
-            DiscountName = request.DiscountName,
             Condition = request.Condition,
             Promocode = request.Promocode,
             StartDate = request.StartDate,

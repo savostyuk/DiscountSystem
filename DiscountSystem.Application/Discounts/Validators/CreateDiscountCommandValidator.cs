@@ -13,9 +13,6 @@ public class CreateDiscountCommandValidator : AbstractValidator<CreateDiscountCo
     {
         _context = context;
 
-        RuleFor(d => d.DiscountName)
-            .NotEmpty().WithMessage("Discount name is required");
-
         RuleFor(d => d.Condition)
             .NotEmpty().WithMessage("Condition is required");
 

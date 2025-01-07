@@ -23,7 +23,6 @@ public class GetAllDiscountsHandler : IRequestHandler<GetAllDiscountsQuery, List
             .Select(d => new DiscountDTO
             {
                 Id = d.Id,
-                DiscountName = d.DiscountName,
                 VendorName = d.Vendor.VendorName,
                 Category = d.Category.CategoryName,
                 Condition = d.Condition,

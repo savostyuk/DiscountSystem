@@ -32,7 +32,6 @@ public class GetDiscountByVendorIdHandler : IRequestHandler<GetDiscountByVendorI
             .Select(d => new DiscountDTO
             {
                 Id = d.Id,
-                DiscountName = d.DiscountName,
                 Condition = d.Condition,
                 Promocode = d.Promocode,
                 StartDate = d.StartDate,

@@ -6,7 +6,6 @@ namespace DiscountSystem.Application.Discounts.Commands;
 public record UpdateDiscountCommand : IRequest
 {
     public Guid Id { get; init; }
-    public string DiscountName { get; init; }
     public string Condition { get; init; }
     public string Promocode { get; init; }
     public DateTime StartDate { get; init; }
@@ -30,7 +29,6 @@ public class UpdateDiscountCommandHandler : IRequestHandler<UpdateDiscountComman
             throw new Exception($"Entity with Id = {request.Id} was not found");
         }
 
-        entity.DiscountName = request.DiscountName;
         entity.Condition = request.Condition;
         entity.Promocode = request.Promocode;
         entity.StartDate = request.StartDate;
