@@ -41,6 +41,27 @@ public class CategoriesController : ControllerBase
     }
 
     /// <summary>
+    /// Get details of a specific category by its unique identifier.
+    /// </summary>
+    /// <param name="Id">The unique identifier of the category.</param>
+    /// <response code="200">Category details successfully retrieved.</response>
+    /// <response code="404">If the category is not found.</response>
+    /// <returns></returns>
+    [AllowAnonymous]
+    [HttpGet("{Id:guid}")]
+    public async Task<IActionResult> GetCategoryById(Guid Id)
+    {
+        var query = new GetCategoryByIdQuery { Id = Id };
+        var result = await _mediator.Send(query);
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+        return Ok(result);
+    }
+
+    /// <summary>
     /// Create a new category.
     /// </summary>
     /// <param name="command">The command to create a category.</param>
