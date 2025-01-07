@@ -22,10 +22,7 @@ public class GetAllCategoriesHandler : IRequestHandler<GetAllCategoriesQuery, Li
             {
                 Id = c.Id,
                 CategoryName = c.CategoryName,
-                CreatedAt = c.CreatedAt,
-                CreatedBy = c.CreatedBy,
-                LastModifiedAt = c.LastModifiedAt,
-                LastModifiedBy = c.LastModifiedBy
+                Tags = c.Tags
             }).ToListAsync(cancellationToken);
     }
 }

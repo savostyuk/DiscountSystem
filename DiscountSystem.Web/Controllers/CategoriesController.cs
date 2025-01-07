@@ -1,5 +1,6 @@
 ﻿using DiscountSystem.Application.Categories.Commands;
 using DiscountSystem.Application.Categories.Queries;
+using DiscountSystem.Application.Tags.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -122,6 +123,23 @@ public class CategoriesController : ControllerBase
     public async Task<IActionResult> GetDiscountsByCategoryId(Guid categoryId)
     {
         var query = new GetDiscountByCategoryIdQuery(categoryId);
+        var result = await _mediator.Send(query);
+
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Retrieve all tags associated with a specific category.
+    /// </summary>
+    /// <param name="categoryId">The unique identifier of the category.</param>
+    /// <response code="200">Tags successfully retrieved.</response>
+    /// <response code="404">If the category is not found or has no associated tags.</response>
+    /// <returns></returns>
+    [AllowAnonymous]
+    [HttpGet("{id}/tags")] //api/categories/{id}/tags
+    public async Task<IActionResult> GetTagsByCategoryId(Guid categoryId)
+    {
+        var query = new GetTagsByCategoryIdQuery(categoryId);
         var result = await _mediator.Send(query);
 
         return Ok(result);

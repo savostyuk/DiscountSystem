@@ -17,6 +17,7 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
     public DbSet<Vendor> Vendors { get; set; }
     public DbSet<Discount> Discounts { get; set; }
     public DbSet<Category> Categories { get; set; }
+    public DbSet<Tag> Tags { get; set; }
     public DbSet<Favorite> Favorites { get; set; }
 
     public DbSet<RefreshToken> RefreshTokens { get; set; }
@@ -24,6 +25,12 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
     protected override void OnModelCreating (ModelBuilder modelBuilder)
     {
         base.OnModelCreating (modelBuilder);
+
+        modelBuilder.Entity<Tag>()
+            .HasOne(t => t.Category)
+            .WithMany(c => c.Tags)
+            .HasForeignKey(c => c.CategoryId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Discount>()
             .HasOne(d => d.Vendor)
