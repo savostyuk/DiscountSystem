@@ -1,5 +1,5 @@
 ﻿using DiscountSystem.Domain.Common;
-using System.ComponentModel.DataAnnotations;
+using DiscountSystem.Domain.Entities;
 
 namespace DiscountSystem.Application.Vendors.Queries;
 
@@ -13,4 +13,5 @@ public class VendorDTO : BaseAuditableEntity
 
     public string Phone { get; set; }
     public string Address { get; set; }
+    public ICollection<Discount> Discounts { get; set; }
 }

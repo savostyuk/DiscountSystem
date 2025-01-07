@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiscountSystem.Application.Vendors.Queries;
 
-public record GetAllVendorsQuery : IRequest<List<VendorDTO>>
+public record GetAllVendorsQuery : IRequest<List<VendorShortDTO>>
 {
 }
 
-public class GetAllVendorsHandler : IRequestHandler<GetAllVendorsQuery, List<VendorDTO>>
+public class GetAllVendorsHandler : IRequestHandler<GetAllVendorsQuery, List<VendorShortDTO>>
 {
     private readonly IApplicationDbContext _context;
 
@@ -17,18 +17,13 @@ public class GetAllVendorsHandler : IRequestHandler<GetAllVendorsQuery, List<Ven
         _context = context;
     }
 
-    public async Task<List<VendorDTO>> Handle(GetAllVendorsQuery request, CancellationToken cancellationToken)
+    public async Task<List<VendorShortDTO>> Handle(GetAllVendorsQuery request, CancellationToken cancellationToken)
     {
         return await _context.Vendors
-            .Select(v => new VendorDTO
+            .Select(v => new VendorShortDTO
             {
                 Id = v.Id,
-                Email = v.Email,
                 VendorName = v.VendorName,
-                WorkingHours = v.WorkingHours,
-                Website = v.Website,
-                Phone = v.Phone,
-                Address = v.Address,
             }).ToListAsync(cancellationToken);
     }
 }

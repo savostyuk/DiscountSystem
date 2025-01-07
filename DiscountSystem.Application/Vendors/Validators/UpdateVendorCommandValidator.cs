@@ -1,7 +1,6 @@
 ﻿using DiscountSystem.Application.Common;
 using DiscountSystem.Application.Vendors.Commands;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 
 namespace DiscountSystem.Application.Vendors.Validators;
 
@@ -17,9 +16,7 @@ public class UpdateVendorCommandValidator : AbstractValidator<UpdateVendorComman
             .NotEmpty()
             .WithMessage("VendorName is required.")
             .MaximumLength(100)
-            .WithMessage("VendorName cannot exceed 100 characters.")
-            .MustAsync(BeUniqueName)
-            .WithMessage("Vendor with this name already exsists.");
+            .WithMessage("VendorName cannot exceed 100 characters.");
 
         RuleFor(p => p.WorkingHours)
             .MaximumLength(50)
@@ -48,9 +45,5 @@ public class UpdateVendorCommandValidator : AbstractValidator<UpdateVendorComman
             .WithMessage("Address number is required.")
             .Length(5, 250)
             .WithMessage("Address must be between 5 and 250 characters.");
-    }
-    private async Task<bool> BeUniqueName(string name, CancellationToken cancellationToken)
-    {
-        return !await _context.Vendors.AnyAsync(v => v.VendorName == name, cancellationToken);
     }
 }

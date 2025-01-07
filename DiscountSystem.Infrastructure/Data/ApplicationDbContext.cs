@@ -28,7 +28,8 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
         modelBuilder.Entity<Discount>()
             .HasOne(d => d.Vendor)
             .WithMany(d => d.Discounts)
-            .HasForeignKey(d => d.VendorId);
+            .HasForeignKey(d => d.VendorId)
+            .OnDelete(DeleteBehavior.Cascade); ;
 
         modelBuilder.Entity<Discount>()
             .HasOne(d => d.Category)
