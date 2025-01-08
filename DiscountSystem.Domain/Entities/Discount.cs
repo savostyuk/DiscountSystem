@@ -12,4 +12,5 @@ public class Discount : BaseAuditableEntity
     public Vendor Vendor { get; set; }
     public Guid CategoryId { get; set; }
     public Category Category { get; set; }
+    public ICollection<Tag> Tags { get; set; }
 }

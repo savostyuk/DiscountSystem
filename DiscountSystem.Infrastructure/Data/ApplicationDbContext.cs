@@ -9,11 +9,11 @@ namespace DiscountSystem.Infrastructure.Data;
 
 public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>, IApplicationDbContext
 {
-    public ApplicationDbContext (DbContextOptions<ApplicationDbContext> options) : base (options) 
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
-    }  
-    
-    public DbSet<User> Users {get; set;}
+    }
+
+    public DbSet<User> Users { get; set; }
     public DbSet<Vendor> Vendors { get; set; }
     public DbSet<Discount> Discounts { get; set; }
     public DbSet<Category> Categories { get; set; }
@@ -22,21 +22,40 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, 
 
     public DbSet<RefreshToken> RefreshTokens { get; set; }
 
-    protected override void OnModelCreating (ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating (modelBuilder);
+        base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<Tag>()
             .HasOne(t => t.Category)
             .WithMany(c => c.Tags)
             .HasForeignKey(c => c.CategoryId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Discount>()
+            .HasMany(d => d.Tags)
+            .WithMany()
+            .UsingEntity<Dictionary<string, object>>(
+                "DiscountTag",
+                l => l
+                .HasOne<Tag>()
+                .WithMany()
+                .HasForeignKey("TagsId")
+                .HasPrincipalKey(nameof(Tag.Id))
+                .OnDelete(DeleteBehavior.Restrict),
+                r => r
+                .HasOne<Discount>()
+                .WithMany()
+                .HasForeignKey("DiscountsId")
+                .HasPrincipalKey(nameof(Discount.Id)),
+                j => j.HasKey("DiscountsId", "TagsId"));
+
 
         modelBuilder.Entity<Discount>()
             .HasOne(d => d.Vendor)
             .WithMany(d => d.Discounts)
             .HasForeignKey(d => d.VendorId)
-            .OnDelete(DeleteBehavior.Cascade); ;
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<Discount>()
             .HasOne(d => d.Category)

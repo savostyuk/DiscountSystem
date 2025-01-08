@@ -40,6 +40,27 @@ public class VendorsController : ControllerBase
     }
 
     /// <summary>
+    /// Get a vendor by its unique identifier.
+    /// </summary>
+    /// <param name="vendorId">The unique identifier of the vendor.</param>
+    /// <response code="200">Returns the vendor details if found.</response>
+    /// <response code="404">If no vendor is found with the specified identifier.</response>
+    /// <returns></returns>
+    [AllowAnonymous]
+    [HttpGet("{vendorId:guid}")]
+    public async Task<IActionResult> GetVendorById(Guid vendorId)
+    {
+        var query = new GetVendorByIdQuery { Id = vendorId };
+        var result = await _mediator.Send(query);
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+        return Ok(result);
+    }
+
+    /// <summary>
     /// Create a new vendor.
     /// </summary>
     /// <param name="command">The command to create a vendor.</param>
