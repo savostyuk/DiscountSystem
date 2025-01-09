@@ -26,26 +26,18 @@ public class CreateVendorCommandValidator : AbstractValidator<CreateVendorComman
             .WithMessage("WorkingHours cannot exceed 50 characters.");
 
         RuleFor(v => v.Website)
-            .NotEmpty()
-            .WithMessage("Website URL is required.")
             .Matches(@"^(https?://)?([a-z0-9-]+\.)+[a-z]{2,6}(/[\w\.-]*)*/?$")
             .WithMessage("Please enter a valid URL.");
 
         RuleFor(v => v.Email)
-            .NotEmpty()
-            .WithMessage("Email is required.")
             .EmailAddress()
             .WithMessage("Please enter a valid email address.");
 
         RuleFor(v => v.Phone)
-            .NotEmpty()
-            .WithMessage("Phone number is required.")
             .Matches(@"^\d+$")
             .WithMessage("Phone number must contain only numbers.");
 
         RuleFor(v => v.Address)
-            .NotEmpty()
-            .WithMessage("Address number is required.")
             .Length(5, 250)
             .WithMessage("Address must be between 5 and 250 characters.");
     }

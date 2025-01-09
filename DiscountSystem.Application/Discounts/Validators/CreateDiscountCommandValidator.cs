@@ -14,9 +14,13 @@ public class CreateDiscountCommandValidator : AbstractValidator<CreateDiscountCo
         _context = context;
 
         RuleFor(d => d.Condition)
+            .MaximumLength(255)
+            .WithMessage("Condition cannot exceed 255 characters.")
             .NotEmpty().WithMessage("Condition is required");
 
         RuleFor(d => d.Promocode)
+            .MaximumLength(50)
+            .WithMessage("Promocode cannot exceed 50 characters.")
             .NotEmpty().WithMessage("Promocode is required");
 
         RuleFor(d => d.StartDate)
