@@ -67,6 +67,8 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddScoped<TokenProvider>();
+builder.Services.AddScoped<UserManager<User>>();
+builder.Services.AddScoped<RoleManager<IdentityRole<Guid>>>();
 
 builder.Services.AddAuthorization(options =>
 {

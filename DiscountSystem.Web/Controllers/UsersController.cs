@@ -5,6 +5,7 @@ using DiscountSystem.Application.Users.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DiscountSystem.Web.Controllers;
 
@@ -141,6 +142,35 @@ public class UsersController : ControllerBase
         {
             _logger.LogWarning(ex, "User with Id: {UserId} not found.", Id);
             return NotFound(ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// Updates the role of an existing user by their ID.
+    /// </summary>
+    /// <param name="command">
+    /// The <see cref="UpdateUserRoleCommand"/> containing the user's ID and the new role to assign.
+    /// </param>
+    /// <response code="200">User role successfully updated.</response>
+    /// <response code="400">If the request is invalid or an error occurs.</response>
+    /// <response code="404">If the user is not found.</response>
+    /// <returns></returns>
+    [HttpPost("update-role")]
+    public async Task<IActionResult> UpdateUserRole([FromBody] UpdateUserRoleCommand command)
+    {
+        if (command == null || command.Id == Guid.Empty || string.IsNullOrEmpty(command.NewRole))
+        {
+            return BadRequest("Invalid request");
+        }
+
+        try
+        {
+            await _mediator.Send(command);
+            return Ok(new { Message = "User role updated successfully", UserId = command.Id });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { Error = ex.Message });
         }
     }
 }
