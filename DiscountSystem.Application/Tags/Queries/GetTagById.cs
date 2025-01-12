@@ -29,7 +29,7 @@ public class GetTagByIdQueryHandler : IRequestHandler<GetTagByIdQuery, TagDTO>
 
         if (tagDetails == null)
         {
-            throw new Exception($"Tag with Id {request.Id} was not foumd");
+            throw new Exception($"Tag with Id {request.Id} was not found");
         }
 
         return tagDetails;

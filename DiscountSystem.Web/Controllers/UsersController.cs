@@ -1,4 +1,5 @@
 ﻿using DiscountSystem.Application.Common.Models;
+using DiscountSystem.Application.Tags.Queries;
 using DiscountSystem.Application.Users;
 using DiscountSystem.Application.Users.Commands;
 using DiscountSystem.Application.Users.Queries;
@@ -85,6 +86,27 @@ public class UsersController : ControllerBase
         }
 
         return Ok(users);
+    }
+
+    /// <summary>
+    /// Get a user by its unique identifier.
+    /// </summary>
+    /// <param name="userId">The unique identifier of the user.</param>
+    /// <response code="200">User successfully retrieved.</response>
+    /// <response code="404">If the user is not found.</response>
+    /// <returns></returns>
+    [AllowAnonymous]
+    [HttpGet("{userId:guid}")]
+    public async Task<IActionResult> GetUserById(Guid userId)
+    {
+        var query = new GetUserDetailsQuery { Id = userId };
+        var result = await _mediator.Send(query);
+
+        if (result == null)
+        {
+            return NotFound();
+        }
+        return Ok(result);
     }
 
     /// <summary>
