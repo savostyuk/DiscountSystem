@@ -30,6 +30,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddWebServices();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 {
