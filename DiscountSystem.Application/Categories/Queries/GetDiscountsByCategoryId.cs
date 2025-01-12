@@ -33,8 +33,6 @@ public class GetDiscountByCategoryIdHandler : IRequestHandler<GetDiscountByCateg
                 Id = d.Id,
                 Condition = d.Condition,
                 Promocode = d.Promocode,
-                StartDate = d.StartDate,
-                EndDate = d.EndDate
             }).ToListAsync(cancellationToken);
     }
 }

@@ -34,8 +34,6 @@ public class GetDiscountByVendorIdHandler : IRequestHandler<GetDiscountByVendorI
                 Id = d.Id,
                 Condition = d.Condition,
                 Promocode = d.Promocode,
-                StartDate = d.StartDate,
-                EndDate = d.EndDate
             }).ToListAsync(cancellationToken);
     }
 }

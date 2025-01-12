@@ -1,7 +1,5 @@
 ﻿using DiscountSystem.Application.Common;
 using DiscountSystem.Application.Discounts.Queries;
-using DiscountSystem.Application.Tags.Queries;
-using DiscountSystem.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;

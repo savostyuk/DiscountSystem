@@ -26,11 +26,9 @@ public class GetPaginatedDiscountsQueryHandler : IRequestHandler<GetPaginatedDis
             {
                 Id = d.Id,
                 VendorName = d.Vendor.VendorName,
-                Category = d.Category.CategoryName,
+                CategoryName = d.Category.CategoryName,
                 Condition = d.Condition,
                 Promocode = d.Promocode,
-                StartDate = d.StartDate,
-                EndDate = d.EndDate
             }).ToPaginatedListAsync(request.PageNumber, request.PageSize);
     }
 }

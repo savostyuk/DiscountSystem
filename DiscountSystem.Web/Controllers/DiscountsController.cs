@@ -9,7 +9,7 @@ namespace DiscountSystem.Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize(Roles = "Admin, Moderator")]
+[Authorize]
 public class DiscountsController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -25,7 +25,6 @@ public class DiscountsController : ControllerBase
     /// <response code="204">Returns the list of discounts.</response>
     /// <response code="404">If no discounts are found.</response>
     /// <returns>A list of all discounts.</returns>
-    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<List<DiscountDTO>>> GetAllDiscounts()
     {

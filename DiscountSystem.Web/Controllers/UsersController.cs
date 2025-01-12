@@ -1,18 +1,16 @@
 ﻿using DiscountSystem.Application.Common.Models;
-using DiscountSystem.Application.Tags.Queries;
 using DiscountSystem.Application.Users;
 using DiscountSystem.Application.Users.Commands;
 using DiscountSystem.Application.Users.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace DiscountSystem.Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize(Roles = "Admin")]
+[Authorize]
 public class UsersController : ControllerBase
 {
     private readonly IMediator _mediator;

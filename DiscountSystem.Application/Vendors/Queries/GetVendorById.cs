@@ -39,16 +39,14 @@ public class GetVendorByIdQueryHandler : IRequestHandler<GetVendorByIdQuery, Ven
                      Id = d.Id,
                      Condition = d.Condition,
                      Promocode = d.Promocode,
-                     StartDate = d.StartDate,
-                     EndDate = d.EndDate,
                      CategoryId = d.CategoryId,
-                     Tags = d.Tags.Select(tag => tag.Id).ToList() // Get only the tag IDs
+                     Tags = d.Tags.Select(tag => tag.Id).ToList()
                  }).ToList()
              }).FirstOrDefaultAsync(cancellationToken);
 
         if (vendorDetails == null)
         {
-            throw new Exception($"Vendor with Id {request.Id} was not foumd");
+            throw new Exception($"Vendor with Id {request.Id} was not found");
         }
 
         return vendorDetails;

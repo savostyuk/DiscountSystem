@@ -10,4 +10,5 @@ public class DiscountDetailsDTO
 
     public string VendorName { get; set; }
     public string CategoryName { get; set; }
+    public IList<Guid> Tags { get; set; }
 }
