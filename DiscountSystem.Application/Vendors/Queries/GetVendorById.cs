@@ -34,12 +34,14 @@ public class GetVendorByIdQueryHandler : IRequestHandler<GetVendorByIdQuery, Ven
                  Website = v.Website,
                  Phone = v.Phone,
                  Address = v.Address,
-                 Discounts = v.Discounts.Select(d => new DiscountDTO
+                 Discounts = v.Discounts.Select(d => new DiscountDetailsDTO
                  {
                      Id = d.Id,
                      Condition = d.Condition,
                      Promocode = d.Promocode,
                      CategoryId = d.CategoryId,
+                     StartDate = d.StartDate,
+                     EndDate = d.EndDate,
                      Tags = d.Tags.Select(tag => tag.Id).ToList()
                  }).ToList()
              }).FirstOrDefaultAsync(cancellationToken);
