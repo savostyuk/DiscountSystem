@@ -37,7 +37,10 @@ public class GetAllDiscountsHandler : IRequestHandler<GetAllDiscountsQuery, List
             .Select(f => f.DiscountId)
             .ToListAsync(cancellationToken);
 
+        var today = DateTime.UtcNow.Date;
+
         return await _context.Discounts
+             .Where(d => d.EndDate > today)
             .Select(d => new DiscountDTO
             {
                 Id = d.Id,
@@ -46,6 +49,8 @@ public class GetAllDiscountsHandler : IRequestHandler<GetAllDiscountsQuery, List
                 CategoryId = d.Category.Id,
                 Condition = d.Condition,
                 Promocode = d.Promocode,
+                StartDate = d.StartDate,
+                EndDate = d.EndDate,
                 Tags = d.Tags.Select(tag => tag.Id).ToList(),
                 IsFavorite = userFavorites.Contains(d.Id)
             }).ToListAsync(cancellationToken);

@@ -11,5 +11,5 @@ public class VendorDTO
     public string Email { get; set; }
     public string Phone { get; set; }
     public string Address { get; set; }
-    public ICollection<DiscountDetailsDTO> Discounts { get; set; }
+    public ICollection<DiscountDTO> Discounts { get; set; }
 }

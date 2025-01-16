@@ -1,5 +1,4 @@
 ﻿using DiscountSystem.Application.Common;
-using DiscountSystem.Application.Discounts.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -7,11 +6,11 @@ using System.Security.Claims;
 
 namespace DiscountSystem.Application.Favorites.Queries;
 
-public class GetFavoritesByUserIdQuery : IRequest<List<FavoriteDTO>>
+public class GetFavoritesByUserIdQuery : IRequest<List<FavoriteDiscountDTO>>
 {
 }
 
-public class GetFavoritesByUserIdQueryHandler : IRequestHandler<GetFavoritesByUserIdQuery, List<FavoriteDTO>>
+public class GetFavoritesByUserIdQueryHandler : IRequestHandler<GetFavoritesByUserIdQuery, List<FavoriteDiscountDTO>>
 {
     private readonly IApplicationDbContext _context;
     private readonly IHttpContextAccessor _httpContextAccessor;
@@ -22,7 +21,7 @@ public class GetFavoritesByUserIdQueryHandler : IRequestHandler<GetFavoritesByUs
         _httpContextAccessor = httpContextAccessor;
     }
 
-    public async Task<List<FavoriteDTO>> Handle(GetFavoritesByUserIdQuery request, CancellationToken cancellationToken)
+    public async Task<List<FavoriteDiscountDTO>> Handle(GetFavoritesByUserIdQuery request, CancellationToken cancellationToken)
     {
         var userId = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
@@ -47,22 +46,18 @@ public class GetFavoritesByUserIdQueryHandler : IRequestHandler<GetFavoritesByUs
                 .ThenInclude(d => d.Category) // Include Category details
             .Include(f => f.Discount)
                 .ThenInclude(d => d.Tags) // Include Tags details
-            .Select(f => new FavoriteDTO
+            .Select(f => new FavoriteDiscountDTO
             {
                 Note = f.Note,
-                DiscountId = f.DiscountId,
-                Discount = new DiscountDTO
-                {
-                    Id = f.Discount.Id,
-                    Condition = f.Discount.Condition,
-                    Promocode = f.Discount.Promocode,
-                    VendorName = f.Discount.Vendor.VendorName, // Populated Vendor object
-                    CategoryId = f.Discount.CategoryId,
-                    CategoryName = f.Discount.Category.CategoryName, // Populated Category object
-                    Tags = f.Discount.Tags.Select(tag => tag.Id).ToList(), // Populated Tags list
-                    IsFavorite = userFavorites.Contains(f.Id)
-                }
-            })
-            .ToListAsync(cancellationToken);
+                Id = f.DiscountId,
+                CategoryId = f.Discount.CategoryId,
+                CategoryName = f.Discount.Category.CategoryName,
+                StartDate = f.Discount.StartDate,
+                Condition = f.Discount.Condition,
+                Promocode = f.Discount.Promocode,
+                VendorName = f.Discount.Vendor.VendorName, // Populated Vendor object
+                Tags = f.Discount.Tags.Select(tag => tag.Id).ToList(), // Populated Tags list
+                IsFavorite = userFavorites.Contains(f.Id),
+            }).ToListAsync(cancellationToken);
     }
 }

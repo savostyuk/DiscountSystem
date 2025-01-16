@@ -34,7 +34,7 @@ public class GetVendorByIdQueryHandler : IRequestHandler<GetVendorByIdQuery, Ven
                  Website = v.Website,
                  Phone = v.Phone,
                  Address = v.Address,
-                 Discounts = v.Discounts.Select(d => new DiscountDetailsDTO
+                 Discounts = v.Discounts.Select(d => new DiscountDTO
                  {
                      Id = d.Id,
                      Condition = d.Condition,
