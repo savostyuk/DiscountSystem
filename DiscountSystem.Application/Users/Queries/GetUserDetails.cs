@@ -26,6 +26,7 @@ public class GetUserDetailsQueryHandler : IRequestHandler<GetUserDetailsQuery, U
             {
                 Id = request.Id,
                 FullName = $"{u.FirstName} {u.LastName}",
+                Location = u.Location,
                 Email = u.Email
             }).FirstOrDefaultAsync(cancellationToken);
 

@@ -26,6 +26,7 @@ public class GetPaginatedUsersQueryHandler : IRequestHandler<GetPaginatedUsersQu
             {
                 Id = u.Id,
                 FullName = $"{u.FirstName} {u.LastName}",
+                Location = u.Location,
                 Email = u.Email
             }).ToPaginatedListAsync(request.PageNumber, request.PageSize);
     }

@@ -33,6 +33,7 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, List<UserDTO
             {
                 Id = user.Id,
                 FullName = $"{user.FirstName} {user.LastName}",
+                Location = user.Location,
                 Email = user.Email,
                 Role = roles.First()
             });

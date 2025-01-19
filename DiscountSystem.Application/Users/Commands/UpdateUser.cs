@@ -8,6 +8,7 @@ public record UpdateUserCommand : IRequest
     public Guid Id { get; init; }
     public string FirstName { get; init; }
     public string LastName { get; init; }
+    public string Location { get; init; }
 }
 
 public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
@@ -30,7 +31,8 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
 
          entity.FirstName = request.FirstName;
          entity.LastName = request.LastName;
+         entity.Location = request.Location;
 
-         await _context.SaveChangesAsync(cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }

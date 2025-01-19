@@ -6,6 +6,7 @@ public class User : IdentityUser<Guid>
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
+    public string Location { get; set; }
     public override string UserName
     {
         get => Email; // Use Email as the UserName

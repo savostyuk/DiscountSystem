@@ -38,12 +38,18 @@ public class GetFilteredUsersQueryHandler : IRequestHandler<GetFilteredUsersQuer
             {
                 query = query.Where(u => u.LastName.Contains(request.Filter.LastName));
             }
+
+            if (!string.IsNullOrWhiteSpace(request.Filter.Location))
+            {
+                query = query.Where(u => u.Location.Contains(request.Filter.Location));
+            }
         }
 
         var users = await query.Select(u => new UserDTO
         {
             Id = u.Id,
             Email = u.Email,
+            Location = u.Location,
             FullName = $"{u.FirstName} {u.LastName}"
         }).ToListAsync(cancellationToken);
 

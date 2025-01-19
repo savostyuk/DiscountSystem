@@ -58,6 +58,7 @@ public class ApplicationDbContextInitialiser
                     Email = adminEmail,
                     FirstName = "Administrator",
                     LastName = "User",
+                    Location = "Belarus",
                     UserName = adminEmail
                 };
 

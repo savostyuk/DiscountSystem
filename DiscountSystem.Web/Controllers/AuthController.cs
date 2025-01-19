@@ -28,6 +28,7 @@ public class AuthController : ControllerBase
         {
             FirstName = model.FirstName,
             LastName = model.LastName,
+            Location = model.Location,
             Email = model.Email,
             UserName = model.Email
         };
