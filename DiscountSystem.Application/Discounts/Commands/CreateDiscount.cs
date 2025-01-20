@@ -32,11 +32,6 @@ public class CreateDiscountCommandHandler : IRequestHandler<CreateDiscountComman
             .Where(tag => request.Tags.Contains(tag.Id))
             .ToListAsync(cancellationToken);
 
-        if (tags.Count != request.Tags.Count)
-        {
-            throw new Exception("One or more provided TagIds are invalid.");
-        }
-
         var entity = new Discount
         {
             Condition = request.Condition,
