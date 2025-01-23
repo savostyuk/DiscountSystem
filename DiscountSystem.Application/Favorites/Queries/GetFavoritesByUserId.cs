@@ -53,6 +53,7 @@ public class GetFavoritesByUserIdQueryHandler : IRequestHandler<GetFavoritesByUs
                 CategoryId = f.Discount.CategoryId,
                 CategoryName = f.Discount.Category.CategoryName,
                 StartDate = f.Discount.StartDate,
+                EndDate = f.Discount.EndDate,
                 Condition = f.Discount.Condition,
                 Promocode = f.Discount.Promocode,
                 VendorName = f.Discount.Vendor.VendorName, // Populated Vendor object
