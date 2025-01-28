@@ -46,7 +46,7 @@ public class TokenProvider
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-    public async Task<string> GenerateRefreshToken (Guid userId)
+    public async Task<string> GenerateRefreshToken(Guid userId)
     {
         var refreshTokenValue = Convert.ToBase64String(RandomNumberGenerator.GetBytes(32));
 
@@ -61,6 +61,7 @@ public class TokenProvider
         _context.RefreshTokens.Add(refreshToken);
 
         await _context.SaveChangesAsync();
+
         return refreshToken.Token;
     }
 
@@ -75,16 +76,16 @@ public class TokenProvider
 
         var user = await _context.Users.FindAsync(storedToken.UserId);
 
-        if (user == null) 
+        if (user == null)
         {
             throw new UnauthorizedAccessException("User not found");
         }
 
         var roles = await _context.UserRoles
             .Where(ur => ur.UserId == user.Id)
-            .Join(_context.Roles, 
-                    ur => ur.RoleId, 
-                    role => role.Id, 
+            .Join(_context.Roles,
+                    ur => ur.RoleId,
+                    role => role.Id,
                     (ur, role) => role.Name)
             .ToListAsync();
 

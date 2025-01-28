@@ -1,8 +1,8 @@
 ﻿using DiscountSystem.Application.Favorites.Command;
 using DiscountSystem.Application.Favorites.Queries;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DiscountSystem.Web.Controllers
 {
@@ -63,7 +63,7 @@ namespace DiscountSystem.Web.Controllers
             }
         }
 
-        [HttpGet] 
+        [HttpGet]
         public async Task<IActionResult> GetFavoritesByUserId()
         {
             var query = new GetFavoritesByUserIdQuery();
@@ -73,6 +73,7 @@ namespace DiscountSystem.Web.Controllers
             {
                 return NotFound();
             }
+
             return Ok(result);
         }
     }

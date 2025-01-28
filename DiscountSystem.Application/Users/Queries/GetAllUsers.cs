@@ -2,7 +2,6 @@
 using DiscountSystem.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace DiscountSystem.Application.Users.Queries;
 
@@ -40,5 +39,5 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, List<UserDTO
         }
 
         return userWithRoles;
-}
+    }
 }

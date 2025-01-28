@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiscountSystem.Application.Common;
 
-public interface IApplicationDbContext
+public interface IApplicationDbContext //Есть уже пара интерфейсов, можно их перенести в папку Interfaces
 {
     DbSet<User> Users { get; }
     DbSet<Vendor> Vendors { get; }

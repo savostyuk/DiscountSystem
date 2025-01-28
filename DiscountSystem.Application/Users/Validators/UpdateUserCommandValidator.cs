@@ -1,7 +1,6 @@
 ﻿using DiscountSystem.Application.Common;
 using DiscountSystem.Application.Users.Commands;
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 
 namespace DiscountSystem.Application.Users.Validators;
 

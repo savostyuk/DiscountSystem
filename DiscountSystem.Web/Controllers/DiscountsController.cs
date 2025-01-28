@@ -71,6 +71,7 @@ public class DiscountsController : ControllerBase
         {
             return NotFound();
         }
+
         return Ok(result);
     }
 

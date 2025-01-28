@@ -58,6 +58,7 @@ public class CategoriesController : ControllerBase
         {
             return NotFound();
         }
+
         return Ok(result);
     }
 
@@ -99,8 +100,8 @@ public class CategoriesController : ControllerBase
 
             return NoContent();
         }
-        catch (Exception ex) 
-        { 
+        catch (Exception ex)
+        {
             return NotFound(ex.Message);
         }
 
@@ -117,11 +118,11 @@ public class CategoriesController : ControllerBase
     [HttpPut("{Id:guid}")]
     public async Task<IActionResult> UpdateCategory(Guid Id, [FromBody] UpdateCategoryCommand command)
     {
-        if (Id != command.Id)
+        if (Id != command.Id) //Добавить модель для апдейта на уровне веба, чтобы избавиться от двойной проверки id
         {
             return BadRequest("Category Id in URL does not match Id in request body");
         }
-
+        //Добавить фильтр на ошибки, чтобы избавиться от try catch и возвращать ошибки в одном формате
         try
         {
             await _mediator.Send(command);

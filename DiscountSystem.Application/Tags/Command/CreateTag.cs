@@ -2,7 +2,7 @@
 using DiscountSystem.Domain.Entities;
 using MediatR;
 
-namespace DiscountSystem.Application.Tags.Commands;
+namespace DiscountSystem.Application.Tags.Commands; //Исправить название папки на Commands
 
 public class CreateTagCommand : IRequest<Guid>
 {

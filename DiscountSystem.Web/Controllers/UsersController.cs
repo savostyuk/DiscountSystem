@@ -22,7 +22,7 @@ public class UsersController : ControllerBase
         _mediator = mediator;
         _logger = logger;
     }
-    
+
     /// <summary>
     /// Get all users.
     /// </summary>
@@ -31,14 +31,14 @@ public class UsersController : ControllerBase
     /// <returns>A list of all users.</returns>
     [AllowAnonymous]
     [HttpGet]
-    public async Task<ActionResult<List<UserDTO>>> GetAllUsers() 
+    public async Task<ActionResult<List<UserDTO>>> GetAllUsers()
     {
         _logger.LogInformation("Received request to get all users.");
 
         var query = new GetAllUsersQuery();
         var users = await _mediator.Send(query);
 
-        if (users is null or []) 
+        if (users is null or [])
         {
             _logger.LogWarning("No users found.");
             return NotFound("No user found!");
@@ -78,7 +78,7 @@ public class UsersController : ControllerBase
         var query = new GetFilteredUsersQuery { Filter = filter };
         var users = await _mediator.Send(query);
 
-        if(users is null or [])
+        if (users is null or [])
         {
             return NotFound("Users were not found.");
         }
@@ -104,6 +104,7 @@ public class UsersController : ControllerBase
         {
             return NotFound();
         }
+
         return Ok(result);
     }
 
@@ -125,7 +126,7 @@ public class UsersController : ControllerBase
             _logger.LogInformation("Successfully deleted user with Id: {UserId}.", Id);
             return NoContent();
         }
-        catch (Exception ex) 
+        catch (Exception ex)
         {
             _logger.LogWarning(ex, "User with Id: {UserId} not found.", Id);
             return NotFound(ex.Message);
@@ -146,7 +147,7 @@ public class UsersController : ControllerBase
     {
         _logger.LogInformation("Received request to update user with Id: {UserId}.", Id);
 
-        if (Id != command.Id) 
+        if (Id != command.Id)
         {
             _logger.LogWarning("Mismatched user Ids in URL and request body. URL Id: {UrlId}, Body Id: {BodyId}.", Id, command.Id);
             return BadRequest("User Id in URL does not match Id in request body");

@@ -24,6 +24,7 @@ public class AddToFavoritesCommandHandler : IRequestHandler<AddToFavoritesComman
 
     public async Task<Guid> Handle(AddToFavoritesCommand request, CancellationToken cancellationToken)
     {
+        //GetCurrentUserService
         var userId = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
         if (string.IsNullOrEmpty(userId))
@@ -37,12 +38,7 @@ public class AddToFavoritesCommandHandler : IRequestHandler<AddToFavoritesComman
         {
             UserId = userGuid,
             DiscountId = request.DiscountId,
-        };
-
-        if (entity == null)
-        {
-            throw new Exception($"Favorites cannot be addedd");
-        }
+        } ?? throw new Exception($"Favorites cannot be addedd");
 
         _context.Favorites.Add(entity);
 

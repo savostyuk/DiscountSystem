@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiscountSystem.Web;
 
-public static class DependencyInjection
+public static class DependencyInjection //Сюда же можно вынести настройки сваггера, авторизации
 {
     public static IServiceCollection AddWebServices(this IServiceCollection services)
     {

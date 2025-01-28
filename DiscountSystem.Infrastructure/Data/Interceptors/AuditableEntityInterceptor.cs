@@ -17,7 +17,7 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
         _user = user;
     }
 
-    public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, 
+    public override InterceptionResult<int> SavingChanges(DbContextEventData eventData,
         InterceptionResult<int> result)
     {
         UpdateEntites(eventData.Context);
@@ -47,7 +47,7 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
                 var utcNow = _dateTime.GetUtcNow();
                 var userId = _user.GetCurrentUser();
 
-                if (entry.State == EntityState.Added) 
+                if (entry.State == EntityState.Added)
                 {
                     entry.Entity.CreatedBy = userId;
                     entry.Entity.CreatedAt = utcNow.DateTime;
@@ -62,11 +62,11 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
 
 public static class Extensions
 {
-    public static bool HasChangedOwnedEntities (this EntityEntry entry)
+    public static bool HasChangedOwnedEntities(this EntityEntry entry)
     {
         return entry.References.Any(r =>
-        r.TargetEntry != null &&
-        r.TargetEntry.Metadata.IsOwned() &&
-        (r.TargetEntry.State == EntityState.Added || r.TargetEntry.State == EntityState.Modified));
+            r.TargetEntry != null &&
+            r.TargetEntry.Metadata.IsOwned() &&
+            (r.TargetEntry.State == EntityState.Added || r.TargetEntry.State == EntityState.Modified));
     }
 }
