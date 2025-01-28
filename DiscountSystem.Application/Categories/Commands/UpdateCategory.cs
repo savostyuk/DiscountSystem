@@ -21,7 +21,7 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
     {
         var entity = await _context.Categories.FindAsync([request.Id], cancellationToken);
 
-        if (entity == null)
+        if (entity == null) //Ипользовать Guard, чтобы обеспечить консистентность сообщений в проекте
         {
             throw new Exception($"Entity with Id = {request.Id} was not found");
         }

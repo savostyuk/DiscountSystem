@@ -24,6 +24,7 @@ public class UpdateFavoriteCommandHandler : IRequestHandler<UpdateFavoriteComman
 
     public async Task Handle(UpdateFavoriteCommand request, CancellationToken cancellationToken)
     {
+        //Есть CurrentUserService для получения id текущего пользователя, лучше использовать его, при необходимости расширить
         var userId = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
         if (string.IsNullOrEmpty(userId))
@@ -34,7 +35,7 @@ public class UpdateFavoriteCommandHandler : IRequestHandler<UpdateFavoriteComman
         var userGuid = Guid.Parse(userId);
 
         var entity = await _context.Favorites
-            .FindAsync(new object[] { userGuid, request.DiscountId }, cancellationToken);
+            .FindAsync([userGuid, request.DiscountId], cancellationToken);
 
         if (entity == null)
         {

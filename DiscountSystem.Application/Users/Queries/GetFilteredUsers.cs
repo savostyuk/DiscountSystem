@@ -1,7 +1,6 @@
 ﻿using DiscountSystem.Application.Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 
 namespace DiscountSystem.Application.Users.Queries;
 
@@ -22,9 +21,9 @@ public class GetFilteredUsersQueryHandler : IRequestHandler<GetFilteredUsersQuer
     {
         var query = _context.Users.AsNoTracking();
 
-        if (request.Filter != null) 
-        { 
-            if(!string.IsNullOrWhiteSpace(request.Filter.Email))
+        if (request.Filter != null)
+        {
+            if (!string.IsNullOrWhiteSpace(request.Filter.Email))
             {
                 query = query.Where(u => u.Email.Contains(request.Filter.Email));
             }

@@ -20,6 +20,7 @@ public class GetTagsByCategoryIdQueryHandler : IRequestHandler<GetTagsByCategory
     {
         _context = context;
     }
+
     public async Task<List<TagDTO>> Handle(GetTagsByCategoryIdQuery request, CancellationToken cancellationToken)
     {
         return await _context.Tags

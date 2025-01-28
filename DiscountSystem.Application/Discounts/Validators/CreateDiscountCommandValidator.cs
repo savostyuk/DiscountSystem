@@ -36,7 +36,7 @@ public class CreateDiscountCommandValidator : AbstractValidator<CreateDiscountCo
         RuleFor(d => d.VendorId)
             .NotEqual(Guid.Empty).WithMessage("Vendor Id is required");
 
-        RuleFor(d => d.CategoryId).Must(id => id == null || id !=Guid.Empty)
+        RuleFor(d => d.CategoryId).Must(id => id == null || id != Guid.Empty) //Обрати внимание на id == null (подсказка от вижлы)
             .WithMessage("Valid CategoryId is required");
     }
 }

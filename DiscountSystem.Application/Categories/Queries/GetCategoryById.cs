@@ -28,9 +28,9 @@ public class GetCategoryByIdQueryHandler : IRequestHandler<GetCategoryByIdQuery,
                 CategoryName = c.CategoryName
             }).FirstOrDefaultAsync(cancellationToken);
 
-        if (categoryDetails == null)
+        if (categoryDetails == null) //Для подобных однотипных проверок в хенделе лучше использовать Guard
         {
-            throw new Exception($"Category with Id {request.Id} was not foumd");
+            throw new Exception($"Category with Id {request.Id} was not found");
         }
 
         return categoryDetails;

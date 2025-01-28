@@ -27,7 +27,6 @@ public class CreateDiscountCommandHandler : IRequestHandler<CreateDiscountComman
 
     public async Task<Guid> Handle(CreateDiscountCommand request, CancellationToken cancellationToken)
     {
-
         var tags = await _context.Tags
             .Where(tag => request.Tags.Contains(tag.Id))
             .ToListAsync(cancellationToken);

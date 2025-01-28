@@ -19,7 +19,7 @@ public class GetDiscountDetailsHandler : IRequestHandler<GetDiscountDetailsQuery
     public GetDiscountDetailsHandler(IApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
     {
         _context = context;
-        _httpContextAccessor = httpContextAccessor; 
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public async Task<DiscountDetailsDTO> Handle(GetDiscountDetailsQuery request, CancellationToken cancellationToken)
@@ -54,15 +54,17 @@ public class GetDiscountDetailsHandler : IRequestHandler<GetDiscountDetailsQuery
                 CategoryId = d.CategoryId,
                 CategoryName = d.Category.CategoryName,
                 Tags = d.Tags.Select(tag => tag.Id).ToList(),
+
                 IsFavorite = _context.Favorites
                 .Any(f => f.UserId == userGuid && f.DiscountId == d.Id),
+
                 Note = _context.Favorites
                 .Where(f => f.UserId == userGuid && f.DiscountId == d.Id)
                 .Select(f => f.Note)
                 .FirstOrDefault()
             }).FirstOrDefaultAsync(cancellationToken);
 
-        if (discountDetails == null) 
+        if (discountDetails == null)
         {
             throw new Exception($"Discount with Id {request.Id} was not foumd");
         }

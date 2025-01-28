@@ -81,12 +81,11 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
-app.UseCors("AllowAngularApp");
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     await app.Services.InitialiseDbAsync();
+    app.UseCors("AllowAngularApp");
     app.UseSwagger();
     app.UseSwaggerUI();
 }
